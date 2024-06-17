@@ -1,0 +1,34 @@
+apiVersion: keda.sh/v1alpha1
+kind: TriggerAuthentication
+metadata:
+  name: q-read-trigger-auth
+  namespace: security
+spec:
+  podIdentity:
+    provider: aws
+    roleArn: arn:aws:iam::<Account number>:role/APG-keda-identity-test
+---
+apiVersion: keda.sh/v1alpha1
+kind: ScaledObject
+metadata:
+  name: k8s-sqs-read-msg-keda
+  namespace: security
+spec:
+  scaleTargetRef:
+    apiVersion: apps/v1
+    kind: Deployment
+    name: q-read
+  # pollingInterval:  10
+  # cooldownPeriod:   60
+  # idleReplicaCount: 1
+  # minReplicaCount:  2
+  maxReplicaCount:  10
+  triggers:
+  - type: aws-sqs-queue
+    name: q-read-trigger
+    authenticationRef:
+      name: q-read-trigger-auth
+    metadata:
+      queueURL: https://sqs.us-east-1.amazonaws.com/<Account number>/event-messages-queue
+      queueLength: "5"
+      awsRegion: "us-east-1"

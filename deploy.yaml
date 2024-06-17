@@ -1,0 +1,32 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: q-read
+  namespace: security
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: q-read
+  template:
+    metadata:
+      labels:
+        app: q-read
+    spec:
+      serviceAccountName: apg-sqs-read-msgs
+      containers:
+      - name: q-read
+        image: <Account number>.dkr.ecr.us-east-1.amazonaws.com/keda-pod-identity-registry:latest
+        resources:
+          limits:
+            memory: 64Mi
+          requests:
+            cpu: 250m
+            memory: 64Mi
+---
+apiVersion: v1
+kind: ServiceAccount
+metadata:
+  name: apg-sqs-read-msgs
+  namespace: security
+
