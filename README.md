@@ -15,7 +15,7 @@ Amazon EKS Pod Identity, introduced in November 2023 during AWS re:Invent, simpl
 </p>
 
 
-The key aspect of this architecture is the use of the EKS Pod Identity Addon to provide secure access to the SQS queue to the keda operator. The KEDA operator can then use the SQS queue metrics to automatically scale the application deployment as needed.This enables automatic scaling of the application based on the SQS queue metrics.
+The key aspect of this architecture is the use of the EKS Pod Identity Addon to provide secure access to the Amazon SQS queue to the keda operator. The keda operator through trigger authentication and scaled object kubernetes custom resources, uses the IAM role to connect with Amazon SQS Queue to automatically scale up and down the application deployment as needed.The keda operator IAM role establishes a trust relationship with the Pod IAM role having Amazon SQS permission to inject the temporary credentials.
 
 ## Security
 
