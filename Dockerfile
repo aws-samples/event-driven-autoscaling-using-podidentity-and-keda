@@ -1,4 +1,4 @@
-FROM public.ecr.aws/lambda/python:latest
+FROM python:3.11
 ENV PYTHONUNBUFFERED=1
 
 COPY requirements.txt ./
