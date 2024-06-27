@@ -4,7 +4,7 @@ metadata:
   name: q-read
   namespace: security
 spec:
-  replicas: 1
+  replicas: 2  # Increased replicas for high availability
   selector:
     matchLabels:
       app: q-read
@@ -13,20 +13,22 @@ spec:
       labels:
         app: q-read
     spec:
-      serviceAccountName: apg-sqs-read-msgs
+      serviceAccountName: my-sqs-read-msgs
+      automountServiceAccountToken: false
       containers:
       - name: q-read
-        image: <Account number>.dkr.ecr.us-east-1.amazonaws.com/keda-pod-identity-registry:latest
+        image: 844933341824.dkr.ecr.us-east-1.amazonaws.com/keda-pod-identity-registry:latest
         resources:
           limits:
-            memory: 64Mi
+            cpu: "500m"  # Add CPU limit
+            memory: "128Mi"  # Increase memory limit
           requests:
-            cpu: 250m
-            memory: 64Mi
+            cpu: "250m"
+            memory: "64Mi"
 ---
 apiVersion: v1
 kind: ServiceAccount
 metadata:
-  name: apg-sqs-read-msgs
+  name: my-sqs-read-msgs
   namespace: security
 
