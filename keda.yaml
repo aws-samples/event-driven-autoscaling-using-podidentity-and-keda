@@ -6,7 +6,7 @@ metadata:
 spec:
   podIdentity:
     provider: aws
-    roleArn: arn:aws:iam::<Account number>:role/APG-keda-identity-test
+    roleArn: arn:aws:iam::{{AWS_ACCOUNT_ID}}:role/APG-keda-identity-test
 ---
 apiVersion: keda.sh/v1alpha1
 kind: ScaledObject
@@ -29,6 +29,6 @@ spec:
     authenticationRef:
       name: q-read-trigger-auth
     metadata:
-      queueURL: https://sqs.us-east-1.amazonaws.com/<Account number>/event-messages-queue
+      queueURL: https://sqs.us-east-1.amazonaws.com/{{AWS_ACCOUNT_ID}}/event-messages-queue
       queueLength: "5"
-      awsRegion: "us-east-1"
+      awsRegion: {{AWS_REGION}}
