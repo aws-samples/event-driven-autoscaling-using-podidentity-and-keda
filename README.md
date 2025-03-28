@@ -1,4 +1,4 @@
-## Event driven autoscaling using Pod Identity and KEDA
+## Event-driven auto scaling using EKS Pod Identity and KEDA
 
 
 Orchestration platforms like Amazon EKS have streamlined the process of building, securing, operating, and maintaining container-based applications, allowing organizations to focus on development. As customers increasingly adopt event-driven deployment, they can scale Kubernetes deployments based on various event sources. This approach, combined with autoscaling, can lead to significant cost savings by providing on-demand compute resources and efficient scaling based on application logic. Kubernetes supports cluster-level autoscaling with the Cluster Autoscaler and application-level autoscaling with the Horizontal Pod Autoscaler (HPA) and Vertical Pod Autoscaler (VPA), which scale pods based on CPU and memory usage. However, for complex scenarios like event-driven autoscaling, metrics related to application logic are crucial.
