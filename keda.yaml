@@ -29,6 +29,6 @@ spec:
     authenticationRef:
       name: q-read-trigger-auth
     metadata:
-      queueURL: https://sqs.us-east-1.amazonaws.com/{{AWS_ACCOUNT_ID}}/event-messages-queue
+      queueURL: https://sqs.{{AWS_REGION}}.amazonaws.com/{{AWS_ACCOUNT_ID}}/event-messages-queue
       queueLength: "5"
       awsRegion: {{AWS_REGION}}
