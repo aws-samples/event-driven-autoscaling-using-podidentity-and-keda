@@ -17,7 +17,7 @@ spec:
       automountServiceAccountToken: false
       containers:
       - name: q-read
-        image: {{AWS_ACCOUNT_ID}}.dkr.ecr.{{AWS_ACCOUNT_REGION}}.amazonaws.com/keda-pod-identity-registry:latest
+        image: {{AWS_ACCOUNT_ID}}.dkr.ecr.{{AWS_REGION}}.amazonaws.com/keda-pod-identity-registry:latest
         resources:
           limits:
             cpu: "500m"  # Add CPU limit
