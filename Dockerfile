@@ -1,4 +1,4 @@
-FROM python:3.11
+FROM public.ecr.aws/docker/library/python:3.11
 # Set environment variable for Python
 ENV PYTHONUNBUFFERED=1
 
