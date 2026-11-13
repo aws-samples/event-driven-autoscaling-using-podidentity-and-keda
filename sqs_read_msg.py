@@ -37,10 +37,13 @@ while True:
     
     if "Messages" in messages:
         for message in messages["Messages"]:
+            # Log only selected fields (message ID, parsed number), never the full body.
+            # Production consumers must not log raw payloads that may contain sensitive data.
+            message_id = message.get("MessageId", "unknown")
             try:
-                logging.info(f'Message body: {message["Body"]}')
                 _temp = json.loads(message["Body"])
                 fib_number = int(_temp["num"])
+                logging.info(f"Message ID: {message_id}, num: {fib_number}")
 
                 # Generate Fibonacci Series
                 lst = []
@@ -52,7 +55,7 @@ while True:
 
                 sqs.delete_message(QueueUrl=queue_url, ReceiptHandle=message["ReceiptHandle"])
             except:
-                logging.error(f'Message Body is not in JSON format {message["Body"]}')
+                logging.error(f"Message ID: {message_id} could not be parsed as JSON with a numeric 'num' field")
             finally:
                 continue
 
