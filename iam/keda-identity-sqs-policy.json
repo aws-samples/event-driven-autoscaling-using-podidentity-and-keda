@@ -1,0 +1,16 @@
+{
+    "Version": "2012-10-17",
+    "Statement": [
+        {
+            "Sid": "KedaIdentityEventMessagesQueueAccess",
+            "Effect": "Allow",
+            "Action": [
+                "sqs:GetQueueUrl",
+                "sqs:GetQueueAttributes",
+                "sqs:ReceiveMessage",
+                "sqs:DeleteMessage"
+            ],
+            "Resource": "arn:aws:sqs:{{AWS_REGION}}:{{AWS_ACCOUNT_ID}}:event-messages-queue"
+        }
+    ]
+}
